@@ -1,0 +1,16 @@
+/* src/styles.css */
+body.dark {
+    background-color: #1a202c;
+    color: #cbd5e0;
+  }
+  
+  body.minimal .container {
+    max-width: 80%;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  body.minimal header, body.minimal footer {
+    display: none;
+  }
+  

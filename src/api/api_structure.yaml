@@ -1,0 +1,346 @@
+openapi: 3.0.0
+info:
+  title: Mock API
+  version: 1.0.0
+  description: Mock API for breaking news, investigation articles, reports, trending topics, and newsletter subscriptions
+
+paths:
+  /breaking-news:
+    get:
+      summary: Get breaking news
+      operationId: getBreakingNews
+      responses:
+        '200':
+          description: A list of breaking news
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BreakingNews'
+  /breaking-news/{id}:
+    get:
+      summary: Get breaking news detail
+      operationId: getBreakingNewsDetail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Breaking news detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BreakingNewsDetail'
+        '404':
+          description: News not found
+  /investigations:
+    get:
+      summary: Get investigation articles
+      operationId: getInvestigationArticles
+      responses:
+        '200':
+          description: A list of investigation articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvestigationArticle'
+  /investigation/{id}:
+    get:
+      summary: Get investigation article detail
+      operationId: getInvestigationArticleDetail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Investigation article detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestigationArticleDetail'
+        '404':
+          description: Article not found
+  /investigation/{id}/comments:
+    get:
+      summary: Get comments for an investigation article
+      operationId: getComments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      summary: Add a comment to an investigation article
+      operationId: addComment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Comment to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+      responses:
+        '200':
+          description: Comment added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /reports:
+    get:
+      summary: Get reports
+      operationId: getReports
+      responses:
+        '200':
+          description: A list of reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+  /reports/{id}:
+    get:
+      summary: Get report detail
+      operationId: getReportDetail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Report detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+        '404':
+          description: Report not found
+  /trending-topics:
+    get:
+      summary: Get trending topics
+      operationId: getTrendingTopics
+      responses:
+        '200':
+          description: A list of trending topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /data-visualization:
+    get:
+      summary: Get data visualization
+      operationId: getDataVisualization
+      responses:
+        '200':
+          description: Data visualization
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataVisualization'
+  /subscribe:
+    post:
+      summary: Subscribe to newsletter
+      operationId: subscribeNewsletter
+      requestBody:
+        description: Email to subscribe
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Subscription successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+
+components:
+  schemas:
+    BreakingNews:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        summary:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        category:
+          type: string
+        trending:
+          type: integer
+        showInBar:
+          type: boolean
+    BreakingNewsDetail:
+      allOf:
+        - $ref: '#/components/schemas/BreakingNews'
+        - type: object
+          properties:
+            content:
+              type: string
+            author:
+              type: string
+            likes:
+              type: integer
+            comments:
+              type: integer
+            relatedNews:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelatedNews'
+    RelatedNews:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+    InvestigationArticle:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        summary:
+          type: string
+        image:
+          type: string
+        author:
+          type: string
+        date:
+          type: string
+          format: date
+        readTime:
+          type: integer
+        views:
+          type: integer
+        category:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        isFeatured:
+          type: boolean
+        isBreaking:
+          type: boolean
+    InvestigationArticleDetail:
+      allOf:
+        - $ref: '#/components/schemas/InvestigationArticle'
+        - type: object
+          properties:
+            subtitle:
+              type: string
+            content:
+              type: string
+            likes:
+              type: integer
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          type: string
+        comment:
+          type: string
+        date:
+          type: string
+          format: date
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        date:
+          type: string
+          format: date
+        summary:
+          type: string
+    ReportDetail:
+      allOf:
+        - $ref: '#/components/schemas/Report'
+        - type: object
+          properties:
+            content:
+              type: string
+            author:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            category:
+              type: string
+            trending:
+              type: integer
+            likes:
+              type: integer
+            comments:
+              type: integer
+            relatedReports:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelatedReport'
+    RelatedReport:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+    DataVisualization:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
