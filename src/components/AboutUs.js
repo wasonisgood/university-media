@@ -28,13 +28,13 @@ const AboutUs = ({ darkMode }) => {
             className="text-5xl font-bold mb-12 text-center text-red-600"
             variants={itemVariants}
           >
-            關於燃楓新聞
+            關於黒潮に乗る伝書鳩 
           </motion.h1>
 
           <motion.section className="mb-16" variants={itemVariants}>
             <h2 className="text-3xl font-semibold mb-6 text-center text-red-500">我們的使命</h2>
             <p className="mb-4 text-lg text-center max-w-3xl mx-auto">
-              燃楓新聞致力於為讀者提供最及時、最準確的新聞報導。我們相信，在這個資訊爆炸的時代，高品質的新聞報導對於維護民主社會和公民參與至關重要。
+              黒潮に乗る伝書鳩 致力於為讀者提供最及時、最準確的新聞報導。我們相信，在這個資訊爆炸的時代，高品質的新聞報導對於維護民主社會和公民參與至關重要。
             </p>
             <p className="text-lg text-center max-w-3xl mx-auto">
               我們的團隊由經驗豐富的記者、編輯和數據分析師組成，他們都擁有深厚的專業背景和對真相的不懈追求精神。

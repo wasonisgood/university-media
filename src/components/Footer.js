@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p>&copy; 2024 燃楓新聞. 版權所有.</p>
+          <p>&copy; 2024 黒潮に乗る伝書鳩 . 版權所有.</p>
         </div>
       </div>
     </footer>

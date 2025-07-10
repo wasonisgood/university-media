@@ -25,7 +25,7 @@ const NavBar = ({ darkMode, setDarkMode }) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link to="/">
-            <h1 className="text-3xl font-bold text-red-600 dark:text-red-400">燃楓新聞</h1>
+            <h1 className="text-3xl font-bold text-red-600 dark:text-red-400">黒潮に乗る伝書鳩 </h1>
           </Link>
           <nav>
             <ul className="flex space-x-4">
